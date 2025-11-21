@@ -1,0 +1,3 @@
+mkdir my-website
+cd my-website
+npm init -y   # initializes package.json
