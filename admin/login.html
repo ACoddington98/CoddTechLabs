@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Login - CoddTechLabs</title>
-  <link rel="stylesheet" href="../css/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
   <main class="main-content">
@@ -12,10 +12,10 @@
       <h2>Admin Login</h2>
       <form id="adminLoginForm">
         <label for="adminEmail">Email</label>
-        <input type="email" id="adminEmail" placeholder="Enter admin email" required>
+        <input type="email" id="adminEmail" placeholder="Enter your email" required>
 
         <label for="adminPassword">Password</label>
-        <input type="password" id="adminPassword" placeholder="Enter password" required>
+        <input type="password" id="adminPassword" placeholder="Enter your password" required>
 
         <button type="submit">Login</button>
         <p id="adminLoginFeedback"></p>
@@ -24,24 +24,24 @@
   </main>
 
   <script>
-    // Hardcoded admin credentials (replace with your own or connect to Supabase later)
-    const ADMIN_EMAIL = "austincoddington@coddtechlabs.com";
+    const ADMIN_EMAIL = "AustinCoddington@coddtechlabs.com";
     const ADMIN_PASSWORD = "Rubberband1!";
 
-    const adminLoginForm = document.getElementById('adminLoginForm');
-    const adminLoginFeedback = document.getElementById('adminLoginFeedback');
+    const adminLoginForm = document.getElementById("adminLoginForm");
+    const adminLoginFeedback = document.getElementById("adminLoginFeedback");
 
-    adminLoginForm.addEventListener('submit', (e) => {
+    adminLoginForm.addEventListener("submit", (e) => {
       e.preventDefault();
 
-      const email = document.getElementById('adminEmail').value;
-      const password = document.getElementById('adminPassword').value;
+      const email = document.getElementById("adminEmail").value.trim();
+      const password = document.getElementById("adminPassword").value.trim();
 
-      if (email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
-        // Save a simple token in session storage
-        sessionStorage.setItem('adminLoggedIn', 'true');
-        window.location.href = 'dashboard.html';
+      if(email === ADMIN_EMAIL && password === ADMIN_PASSWORD) {
+        // Successful login
+        sessionStorage.setItem("adminLoggedIn", "true");
+        window.location.href = "dashboard.html";
       } else {
+        // Failed login
         adminLoginFeedback.textContent = "Invalid email or password.";
         adminLoginFeedback.className = "warning";
       }
