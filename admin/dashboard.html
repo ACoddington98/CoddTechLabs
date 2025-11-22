@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard - CoddTechLabs</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+  <header>
+    <nav>
+      <div class="nav-left">
+        <a href="../index.html" class="logo">CoddTechLabs</a>
+        <ul class="nav-links">
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../services.html">Services</a></li>
+          <li><a href="../portfolio.html">Portfolio</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <div id="adminProfile">
+          <img src="../images/default-profile.png" id="adminAvatar" class="profile-avatar" alt="Admin Avatar">
+          <span id="adminName">Hello, Admin</span>
+          <button id="adminLogoutBtn">Logout</button>
+        </div>
+      </div>
+    </nav>
+  </header>
+
+  <main class="main-content">
+    <section class="hero">
+      <h1>Admin Dashboard</h1>
+      <p>Welcome to your admin dashboard. Manage users, projects, and content here.</p>
+    </section>
+
+    <section class="alt-bg">
+      <h2>Admin Tools</h2>
+      <div class="project-card">
+        <h3>User Management</h3>
+        <p>View, edit, or delete user accounts.</p>
+      </div>
+      <div class="project-card">
+        <h3>Project Management</h3>
+        <p>Update or add new portfolio projects.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 CoddTechLabs. All rights reserved.</p>
+  </footer>
+
+  <script>
+    const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+
+    adminLogoutBtn.addEventListener('click', () => {
+      // For now, just redirect to login
+      window.location.href = 'login.html';
+    });
+  </script>
+</body>
+</html>
