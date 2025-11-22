@@ -4,15 +4,35 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Admin Dashboard – CoddTechLabs</title>
-  <link rel="stylesheet" href="admin.css">
+  <link rel="stylesheet" href="../css/style.css"> <!-- reuse main site CSS -->
+  <link rel="stylesheet" href="admin.css">       <!-- optional admin tweaks -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <div class="dashboard-container">
+  <!-- Header / Navigation -->
+  <header>
+    <nav>
+      <a href="../index.html" class="logo">CoddTechLabs</a>
+      <ul>
+        <li><a href="../about.html">About</a></li>
+        <li><a href="../services.html">Services</a></li>
+        <li><a href="../portfolio.html">Portfolio</a></li>
+        <li><a href="../contact.html">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Admin Dashboard -->
+  <section class="dashboard-container">
     <h2>Admin Messages</h2>
     <button id="logoutBtn">Logout</button>
     <div id="messages"></div>
-  </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2025 CoddTechLabs. All rights reserved.</p>
+  </footer>
 
   <script src="admin.js"></script>
 </body>
