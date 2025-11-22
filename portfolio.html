@@ -8,84 +8,43 @@
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-<header>
-  <nav>
-    <div class="nav-left">
-      <a href="index.html" class="logo">CoddTechLabs</a>
-      <ul class="nav-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div class="nav-right">
-      <a href="auth/login.html" id="loginBtn">Login</a>
-      <a href="auth/register.html" id="registerBtn">Register</a>
-    </div>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <div class="nav-left">
+        <a href="index.html" class="logo">CoddTechLabs</a>
+        <ul class="nav-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <a href="#" id="loginBtn">Login</a>
+        <a href="#" id="registerBtn">Register</a>
+        <span id="userGreeting" style="display:none;"></span>
+      </div>
+    </nav>
+  </header>
 
-  <section class="portfolio">
-    <h2>Portfolio</h2>
-    <div class="project-card">
-      <img src="images/project1.jpg" alt="Project 1">
-      <h3>AI Chatbot</h3>
-      <p>Python-based chatbot with natural language processing capabilities.</p>
-    </div>
-    <div class="project-card">
-      <img src="images/project2.jpg" alt="Project 2">
-      <h3>Web Dashboard</h3>
-      <p>JavaScript web dashboard for real-time analytics and visualization.</p>
-    </div>
-    <div class="project-card">
-      <img src="images/project3.jpg" alt="Project 3">
-      <h3>Automation Tool</h3>
-      <p>C++ utility for automating repetitive system tasks efficiently.</p>
-    </div>
-  </section>
+  <div class="main-content">
+    <section>
+      <h2>Portfolio</h2>
+      <div class="project-card">
+        <img src="images/project1.jpg" alt="Project 1">
+        <h3>AI Chatbot</h3>
+        <p>Custom AI chatbot built with Python and NLP.</p>
+      </div>
+      <div class="project-card">
+        <img src="images/project2.jpg" alt="Project 2">
+        <h3>Web App</h3>
+        <p>Interactive full-stack web application using JavaScript and Supabase backend.</p>
+      </div>
+    </section>
+  </div>
 
   <footer>
     <p>&copy; 2025 CoddTechLabs. All rights reserved.</p>
   </footer>
-  <script src="js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const SUPABASE_URL = "https://qiobjgsmvalwknijuube.supabase.co";
-  const SUPABASE_ANON_KEY = "YOUR_PUBLISHABLE_KEY";
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  async function updateHeader() {
-    const { data: { session } } = await supabase.auth.getSession();
-    const loginBtn = document.getElementById("loginBtn");
-    const registerBtn = document.getElementById("registerBtn");
-
-    if(session) {
-      // User is logged in
-      const { data: profile } = await supabase
-        .from("user_profiles")
-        .select("username")
-        .eq("id", session.user.id)
-        .single();
-
-      // Hide login/register
-      loginBtn.style.display = "none";
-      registerBtn.style.display = "none";
-
-      // Add greeting
-      let greeting = document.createElement("a");
-      greeting.id = "userGreeting";
-      greeting.href = "auth/profile.html";
-      greeting.textContent = `Hello, ${profile.username}`;
-      document.querySelector(".nav-right").appendChild(greeting);
-    } else {
-      // Not logged in, buttons show
-      loginBtn.style.display = "inline-block";
-      registerBtn.style.display = "inline-block";
-    }
-  }
-
-  updateHeader();
-</script>
 </body>
 </html>
