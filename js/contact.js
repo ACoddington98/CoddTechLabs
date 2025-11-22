@@ -1,22 +1,26 @@
-<section class="contact">
-  <h2>Contact Me</h2>
-  <form id="contactForm">
-    <label for="name">Name</label>
-    <input type="text" id="name" name="name" required>
+const SUPABASE_URL = "https://qiobjgsmvalwknijuube.supabase.co";
+const SUPABASE_ANON_KEY = "sb_publishable_BfFRc4t5A_F94S4KrD4s3A_VwtlanUM";
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-    <label for="email">Email</label>
-    <input type="email" id="email" name="email" required>
+const contactForm = document.getElementById("contactForm");
+const formStatus = document.getElementById("formStatus");
 
-    <label for="message">Message</label>
-    <textarea id="message" name="message" rows="5" required></textarea>
+contactForm.addEventListener("submit", async (e) => {
+  e.preventDefault();
 
-    <button type="submit">Send Message</button>
-  </form>
+  const name = document.getElementById("name").value;
+  const email = document.getElementById("email").value;
+  const message = document.getElementById("message").value;
 
-  <p>Or email me directly at <a href="mailto:AustinCoddington@CoddTechLabs.com">AustinCoddington@CoddTechLabs.com</a></p>
+  const { data, error } = await supabase
+    .from("messages")
+    .insert([{ name, email, message, is_read: false }]);
 
-  <p id="formStatus"></p>
-</section>
-
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="js/contact.js"></script>
+  if (error) {
+    formStatus.innerText = "Failed to send message. Please try again.";
+    console.error(error);
+  } else {
+    formStatus.innerText = "Message sent! Thank you.";
+    contactForm.reset();
+  }
+});
