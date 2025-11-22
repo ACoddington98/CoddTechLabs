@@ -1,24 +1,36 @@
-/* Header nav flex layout */
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Roboto', 'Open Sans', 'Lato', sans-serif;
+}
+
+/* Base body & layout */
+html, body {
+  height: 100%;
+  background-color: #FFFFFF; /* main content white background */
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  color: #1A1F71; /* Deep Blue primary text */
+  line-height: 1.6;
+}
+
+.main-content {
+  flex: 1; /* push footer to bottom */
+}
+
+/* Header & Navigation */
 header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #0a2540;
-}
-html, body {
-  height: 100%;
-  background-color: #0a2540; /* navy background for the full page */
-}
-body {
-  display: flex;
-  flex-direction: column;
-  min-height: 100vh; /* full viewport height */
-  margin: 0;
-}
-
-.main-content {
-  flex: 1; /* take remaining space so footer stays at bottom */
+  background-color: #1A1F71; /* Deep Blue nav */
 }
 
 .nav-left {
@@ -30,7 +42,7 @@ body {
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #00bfae; /* logo color pops */
+  color: #3399FF; /* Electric Blue logo accent */
   text-decoration: none;
 }
 
@@ -41,14 +53,14 @@ body {
 }
 
 .nav-links li a {
-  color: #fff;
+  color: #FFFFFF; /* white nav links */
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
 }
 
 .nav-links li a:hover {
-  color: #00bfae;
+  color: #3399FF; /* Electric Blue hover */
 }
 
 .nav-right {
@@ -60,15 +72,15 @@ body {
 .nav-right a {
   padding: 8px 14px;
   border-radius: 5px;
-  background-color: #0070c0; /* slightly muted blue */
-  color: #fff;
+  background-color: #3399FF; /* Electric Blue buttons */
+  color: #FFFFFF;
   text-decoration: none;
   font-weight: bold;
   transition: background 0.3s, transform 0.2s;
 }
 
 .nav-right a:hover {
-  background-color: #005a99;
+  background-color: #267ACC; /* hover */
   transform: translateY(-2px);
 }
 
@@ -81,7 +93,7 @@ body {
 /* Hello username */
 .logged-in #userGreeting {
   display: inline-block;
-  color: #00bfae;
+  color: #3399FF;
   font-weight: bold;
   text-decoration: none;
 }
@@ -92,7 +104,7 @@ body {
     flex-direction: column;
     align-items: flex-start;
   }
-  
+
   .nav-left {
     flex-direction: column;
     gap: 0.5rem;
@@ -108,4 +120,139 @@ body {
   .nav-right a, .logged-in #userGreeting {
     width: auto;
   }
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, #1A1F71 0%, #F2F2F2 100%);
+  color: #FFFFFF;
+  text-align: center;
+  padding: 6rem 2rem;
+}
+
+.hero h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+
+/* Call-to-action buttons */
+.cta-button {
+  background: #3399FF; /* Electric Blue */
+  color: #FFFFFF;
+  padding: 0.75rem 1.5rem;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s;
+}
+
+.cta-button:hover {
+  background: #267ACC; /* hover */
+}
+
+/* Sections */
+section {
+  padding: 4rem 2rem;
+  background-color: #FFFFFF;
+}
+
+section.alt-bg {
+  background-color: #F2F2F2; /* Light Gray alternate */
+}
+
+section h2 {
+  text-align: center;
+  margin-bottom: 2rem;
+  font-size: 2rem;
+  color: #1A1F71;
+}
+
+/* Cards */
+.service-card, .project-card {
+  background-color: #F2F2F2;
+  padding: 1.5rem;
+  margin: 1rem auto;
+  max-width: 600px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.05);
+}
+
+.project-card img {
+  width: 100%;
+  border-radius: 5px;
+  margin-bottom: 1rem;
+}
+
+/* Profile pictures */
+.profile-pic {
+  display: block;
+  margin: 2rem auto;
+  max-width: 200px;
+  border-radius: 50%;
+}
+
+/* Forms */
+form {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+input, textarea, select {
+  padding: 0.75rem;
+  border-radius: 5px;
+  border: 1px solid #CCCCCC;
+}
+
+input:focus, textarea:focus, select:focus {
+  outline: 2px solid #3399FF; /* Electric Blue focus */
+}
+
+/* Buttons */
+button {
+  background-color: #3399FF;
+  color: #FFFFFF;
+  padding: 0.75rem 1.5rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+
+button:hover {
+  background-color: #267ACC;
+}
+
+/* Success & Warning messages */
+.success {
+  color: #27AE60; /* Soft Green */
+}
+
+.warning {
+  color: #F2994A; /* Warm Orange */
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 2rem;
+  background-color: #4B4B4B; /* Slate Gray */
+  color: #FFFFFF;
+}
+
+/* Footer links (if any) */
+footer a {
+  color: #3399FF;
+  text-decoration: none;
+}
+
+footer a:hover {
+  text-decoration: underline;
 }
