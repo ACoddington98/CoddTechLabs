@@ -22,7 +22,9 @@
 
   <section class="contact">
     <h2>Contact Me</h2>
-    <form action="mailto:AustinCoddington@CoddTechLabs.com" method="POST" enctype="text/plain">
+
+    <!-- INTERNAL MESSAGING FORM -->
+    <form id="internalMessageForm">
       <label for="name">Name</label>
       <input type="text" id="name" name="name" required>
 
@@ -34,12 +36,47 @@
 
       <button type="submit">Send Message</button>
     </form>
-    <p>Or email me directly at <a href="mailto:AustinCoddington@CoddTechLabs.com">AustinCoddington@CoddTechLabs.com</a></p>
+
+    <!-- KEEP THIS EXACTLY AS YOU WANTED -->
+    <p>Or email me directly at 
+      <a href="mailto:AustinCoddington@CoddTechLabs.com">
+        AustinCoddington@CoddTechLabs.com
+      </a>
+    </p>
   </section>
 
   <footer>
     <p>&copy; 2025 CoddTechLabs. All rights reserved.</p>
   </footer>
+
+  <!-- JAVASCRIPT TO SEND TO YOUR API ROUTE -->
+  <script>
+    const form = document.getElementById("internalMessageForm");
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById("name").value;
+      const email = document.getElementById("email").value;
+      const message = document.getElementById("message").value;
+
+      const response = await fetch("/api/messages/create", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({ name, email, message })
+      });
+
+      if (response.ok) {
+        alert("Message sent! I’ll get back to you soon.");
+        form.reset();
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    });
+  </script>
+
   <script src="js/script.js"></script>
 </body>
 </html>
