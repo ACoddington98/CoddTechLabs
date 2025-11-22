@@ -93,6 +93,81 @@ header nav {
   background-color: #267ACC; /* hover */
   transform: translateY(-2px);
 }
+/* Auth modal */
+.auth-modal {
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0,0,0,0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-modal-content {
+  background-color: #FFFFFF;
+  padding: 2rem;
+  border-radius: 10px;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  position: relative;
+}
+
+.auth-modal-content h2 {
+  margin-bottom: 1rem;
+  color: #1A1F71;
+  text-align: center;
+}
+
+.auth-modal-content input {
+  width: 100%;
+  padding: 0.75rem;
+  margin-bottom: 1rem;
+  border-radius: 5px;
+  border: 1px solid #CCCCCC;
+}
+
+.auth-modal-content button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #3399FF;
+  color: #FFFFFF;
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.auth-modal-content button:hover {
+  background-color: #267ACC;
+}
+
+.auth-modal-content .close {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 1.5rem;
+  cursor: pointer;
+}
+
+.auth-modal-content p {
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.auth-modal-content a {
+  color: #3399FF;
+  text-decoration: none;
+}
+
+.auth-modal-content a:hover {
+  text-decoration: underline;
+}
 
 /* Hide login/register when user is logged in (JS handles this) */
 .logged-in #loginBtn,
