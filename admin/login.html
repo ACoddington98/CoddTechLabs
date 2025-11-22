@@ -3,45 +3,67 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Login – CoddTechLabs</title>
-  <link rel="stylesheet" href="../css/style.css"> <!-- main site CSS -->
-  <link rel="stylesheet" href="admin.css">        <!-- optional admin tweaks -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <title>Admin Login - CoddTechLabs</title>
+  <link rel="stylesheet" href="../css/style.css">
+  <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-  <!-- Header / Navigation -->
   <header>
     <nav>
-      <a href="../index.html" class="logo">CoddTechLabs</a>
-      <ul>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../services.html">Services</a></li>
-        <li><a href="../portfolio.html">Portfolio</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul>
+      <div class="nav-left">
+        <a href="../index.html" class="logo">CoddTechLabs</a>
+        <ul class="nav-links">
+          <li><a href="../about.html">About</a></li>
+          <li><a href="../services.html">Services</a></li>
+          <li><a href="../portfolio.html">Portfolio</a></li>
+          <li><a href="../contact.html">Contact</a></li>
+        </ul>
+      </div>
     </nav>
   </header>
 
-  <!-- Login Form -->
-  <section class="login-container">
-    <h2>Admin Login</h2>
-    <form id="loginForm">
-      <label>Email</label>
-      <input type="email" id="email" placeholder="Your email" required>
+  <main class="main-content center-content">
+    <section>
+      <h2>Admin Login</h2>
+      <form id="adminLoginForm">
+        <label for="adminEmail">Email</label>
+        <input type="email" id="adminEmail" placeholder="Enter your admin email" required>
 
-      <label>Password</label>
-      <input type="password" id="password" placeholder="Password" required>
+        <label for="adminPassword">Password</label>
+        <input type="password" id="adminPassword" placeholder="Enter your password" required>
 
-      <button type="submit">Login</button>
-    </form>
-    <p id="loginStatus"></p>
-  </section>
+        <button type="submit">Login</button>
+        <p id="adminLoginFeedback"></p>
+      </form>
+    </section>
+  </main>
 
-  <!-- Footer -->
   <footer>
     <p>&copy; 2025 CoddTechLabs. All rights reserved.</p>
   </footer>
 
-  <script src="admin.js"></script>
+  <script>
+    const adminLoginForm = document.getElementById('adminLoginForm');
+    const adminLoginFeedback = document.getElementById('adminLoginFeedback');
+
+    adminLoginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const email = document.getElementById('adminEmail').value;
+      const password = document.getElementById('adminPassword').value;
+
+      // Simple simulation: replace this with Supabase/admin auth logic
+      if(email === 'admin@coddtechlabs.com' && password === 'admin123') {
+        adminLoginFeedback.textContent = 'Login successful! Redirecting...';
+        adminLoginFeedback.className = 'success';
+        setTimeout(() => {
+          window.location.href = 'dashboard.html'; // redirect to admin dashboard
+        }, 1000);
+      } else {
+        adminLoginFeedback.textContent = 'Invalid email or password.';
+        adminLoginFeedback.className = 'warning';
+      }
+    });
+  </script>
 </body>
 </html>
