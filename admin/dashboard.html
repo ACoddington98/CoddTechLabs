@@ -53,8 +53,8 @@
   </footer>
 
   <script>
-    // Protect dashboard
-if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+// Protect dashboard
+if(sessionStorage.getItem('adminLoggedIn') !== 'true') {
   window.location.href = 'login.html';
 }
 
