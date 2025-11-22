@@ -53,6 +53,18 @@
   </footer>
 
   <script>
+    // Protect dashboard
+if (sessionStorage.getItem('adminLoggedIn') !== 'true') {
+  window.location.href = 'login.html';
+}
+
+// Logout button
+const adminLogoutBtn = document.getElementById('adminLogoutBtn');
+adminLogoutBtn.addEventListener('click', () => {
+  sessionStorage.removeItem('adminLoggedIn');
+  window.location.href = 'login.html';
+});
+
     const adminLogoutBtn = document.getElementById('adminLogoutBtn');
 
     adminLogoutBtn.addEventListener('click', () => {
