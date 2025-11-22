@@ -3,9 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Contact – CoddTechLabs</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <title>Contact - CoddTechLabs</title>
+  <link rel="stylesheet" href="vss/style.css">
 </head>
 <body>
   <header>
@@ -22,27 +21,20 @@
       <div class="nav-right">
         <a href="#" id="loginBtn">Login</a>
         <a href="#" id="registerBtn">Register</a>
-        <span id="userGreeting" style="display:none;"></span>
+        <span id="userGreeting" class="logged-in"></span>
       </div>
     </nav>
   </header>
 
   <div class="main-content">
-    <section class="alt-bg">
-      <h2>Contact Me</h2>
+    <section>
+      <h2>Contact Us</h2>
       <form id="contactForm">
-        <label for="name">Name</label>
-        <input type="text" id="name" required>
-
-        <label for="email">Email</label>
-        <input type="email" id="email" required>
-
-        <label for="message">Message</label>
-        <textarea id="message" rows="5" required></textarea>
-
+        <input type="text" name="name" placeholder="Your Name" required>
+        <input type="email" name="email" placeholder="Your Email" required>
+        <textarea name="message" placeholder="Your Message" rows="5" required></textarea>
         <button type="submit">Send Message</button>
       </form>
-      <p>Or email me directly at <a href="mailto:AustinCoddington@CoddTechLabs.com">AustinCoddington@CoddTechLabs.com</a></p>
     </section>
   </div>
 
