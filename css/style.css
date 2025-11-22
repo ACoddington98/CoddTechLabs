@@ -1,206 +1,97 @@
-/* Reset */
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-}
-
-body {
-  line-height: 1.6;
-  color: #333;
-}
-
-/* Header */
-header {
-  background: #0a2540;
-  color: #fff;
-  padding: 1rem 2rem;
+/* Header nav flex layout */
+header nav {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  padding: 1rem 2rem;
+  background-color: #0a2540;
 }
 
-header .logo {
-  font-size: 1.5rem;
-  font-weight: bold;
-}
-
-header nav ul {
-  list-style: none;
+.nav-left {
   display: flex;
+  align-items: center;
   gap: 1.5rem;
 }
 
-header nav ul li a {
-  color: #fff;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-header nav ul li a:hover {
-  color: #00bfae;
-}
-
-/* Login/Register Buttons Styling */
-nav ul li a {
-  padding: 8px 12px;
-  border-radius: 5px;
-  text-decoration: none;
-  color: #fff;
-  background-color: #0070f3;
-  transition: background 0.3s;
+.logo {
+  font-size: 1.5rem;
   font-weight: bold;
-}
-
-nav ul li a:hover {
-  background-color: #005bb5;
-}
-
-/* Hero Section */
-.hero {
-  background: linear-gradient(135deg, #0a2540 0%, #005f73 100%);
-  color: #fff;
-  text-align: center;
-  padding: 6rem 2rem;
-}
-
-.hero h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-.hero p {
-  font-size: 1.2rem;
-  margin-bottom: 2rem;
-}
-
-.cta-button {
-  background: #00bfae;
-  color: #fff;
-  padding: 0.75rem 1.5rem;
+  color: #00bfae; /* logo color pops */
   text-decoration: none;
-  border-radius: 5px;
-  transition: background 0.3s;
 }
 
-.cta-button:hover {
-  background: #008f7a;
-}
-
-/* Sections */
-section {
-  padding: 4rem 2rem;
-}
-
-section h2 {
-  text-align: center;
-  margin-bottom: 2rem;
-  font-size: 2rem;
-}
-
-/* Cards */
-.service-card, .project-card {
-  background: #f4f4f4;
-  padding: 1.5rem;
-  margin: 1rem auto;
-  max-width: 600px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0,0,0,0.1);
-}
-
-.project-card img {
-  width: 100%;
-  border-radius: 5px;
-  margin-bottom: 1rem;
-}
-
-/* Profile Picture */
-.profile-pic {
-  display: block;
-  margin: 2rem auto;
-  max-width: 200px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-}
-
-/* Forms */
-form {
-  max-width: 600px;
-  margin: 0 auto;
+.nav-links {
   display: flex;
-  flex-direction: column;
+  list-style: none;
   gap: 1rem;
 }
 
-input, textarea, select {
-  padding: 0.75rem;
-  border-radius: 5px;
-  border: 1px solid #ccc;
-}
-
-/* Buttons */
-button {
-  background: #0a2540;
+.nav-links li a {
   color: #fff;
-  padding: 0.75rem;
-  border: none;
-  border-radius: 5px;
-  cursor: pointer;
+  text-decoration: none;
   font-weight: bold;
+  transition: color 0.3s;
 }
 
-button:hover {
-  background: #005f73;
+.nav-links li a:hover {
+  color: #00bfae;
 }
 
-/* Profile Page Inputs & Upload */
-#profilePic {
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  object-fit: cover;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
 }
 
-#username, #bio, #uploadPic, #updateProfile {
-  display: block;
-  margin: 10px 0;
-  padding: 8px;
-  width: 100%;
-  max-width: 400px;
-}
-
-#updateProfile {
-  background-color: #0070f3;
-  color: white;
-  border: none;
-  cursor: pointer;
-  font-weight: bold;
+.nav-right a {
+  padding: 8px 14px;
   border-radius: 5px;
-}
-
-#updateProfile:hover {
-  background-color: #005bb5;
-}
-
-/* Footer */
-footer {
-  text-align: center;
-  padding: 2rem;
-  background: #0a2540;
+  background-color: #0070c0; /* slightly muted blue */
   color: #fff;
+  text-decoration: none;
+  font-weight: bold;
+  transition: background 0.3s, transform 0.2s;
 }
 
-/* Responsive Design for About/Profile Sections */
+.nav-right a:hover {
+  background-color: #005a99;
+  transform: translateY(-2px);
+}
+
+/* Hide login/register when user is logged in (JS handles this) */
+.logged-in #loginBtn,
+.logged-in #registerBtn {
+  display: none;
+}
+
+/* Hello username */
+.logged-in #userGreeting {
+  display: inline-block;
+  color: #00bfae;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* Responsive for mobile */
 @media screen and (max-width: 768px) {
-  .about-container {
+  header nav {
     flex-direction: column;
-    text-align: center;
+    align-items: flex-start;
+  }
+  
+  .nav-left {
+    flex-direction: column;
+    gap: 0.5rem;
   }
 
-  .profile-pic {
-    margin-bottom: 15px;
+  .nav-right {
+    margin-top: 10px;
+    width: 100%;
+    justify-content: flex-start;
+    gap: 0.5rem;
+  }
+
+  .nav-right a, .logged-in #userGreeting {
+    width: auto;
   }
 }
