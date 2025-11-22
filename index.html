@@ -4,8 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>CoddTechLabs</title>
-  <link rel="stylesheet" href="css/style.css">
-  <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="vss/style.css">
 </head>
 <body>
   <header>
@@ -22,17 +21,18 @@
       <div class="nav-right">
         <a href="#" id="loginBtn">Login</a>
         <a href="#" id="registerBtn">Register</a>
-        <span id="userGreeting" style="display:none;"></span>
+        <span id="userGreeting" class="logged-in"></span>
       </div>
     </nav>
   </header>
 
-  <div class="main-content">
-    <section class="hero">
+  <!-- Full-page hero with background from header to footer -->
+  <div class="main-content" style="background: linear-gradient(180deg, #1A1F71 0%, #F2F2F2 100%); flex:1; display:flex; flex-direction:column; justify-content:center; align-items:center;">
+    <div class="hero">
       <h1>Welcome to CoddTechLabs</h1>
-      <p>Your trusted partner in AI/ML, Python, C/C++, and Web Development.</p>
-      <a href="contact.html" class="cta-button">Get in Touch</a>
-    </section>
+      <p>Professional, modern, and reliable tech solutions for your business.</p>
+      <a href="contact.html" class="cta-button">Get Started</a>
+    </div>
   </div>
 
   <footer>
