@@ -54,5 +54,43 @@
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/contact.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  const SUPABASE_URL = "https://qiobjgsmvalwknijuube.supabase.co";
+  const SUPABASE_ANON_KEY = "YOUR_PUBLISHABLE_KEY";
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  async function updateHeader() {
+    const { data: { session } } = await supabase.auth.getSession();
+    const loginBtn = document.getElementById("loginBtn");
+    const registerBtn = document.getElementById("registerBtn");
+
+    if(session) {
+      // User is logged in
+      const { data: profile } = await supabase
+        .from("user_profiles")
+        .select("username")
+        .eq("id", session.user.id)
+        .single();
+
+      // Hide login/register
+      loginBtn.style.display = "none";
+      registerBtn.style.display = "none";
+
+      // Add greeting
+      let greeting = document.createElement("a");
+      greeting.id = "userGreeting";
+      greeting.href = "auth/profile.html";
+      greeting.textContent = `Hello, ${profile.username}`;
+      document.querySelector(".nav-right").appendChild(greeting);
+    } else {
+      // Not logged in, buttons show
+      loginBtn.style.display = "inline-block";
+      registerBtn.style.display = "inline-block";
+    }
+  }
+
+  updateHeader();
+</script>
 </body>
 </html>
