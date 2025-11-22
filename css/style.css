@@ -11,6 +11,7 @@ body {
   color: #333;
 }
 
+/* Header */
 header {
   background: #0a2540;
   color: #fff;
@@ -41,6 +42,22 @@ header nav ul li a:hover {
   color: #00bfae;
 }
 
+/* Login/Register Buttons Styling */
+nav ul li a {
+  padding: 8px 12px;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #fff;
+  background-color: #0070f3;
+  transition: background 0.3s;
+  font-weight: bold;
+}
+
+nav ul li a:hover {
+  background-color: #005bb5;
+}
+
+/* Hero Section */
 .hero {
   background: linear-gradient(135deg, #0a2540 0%, #005f73 100%);
   color: #fff;
@@ -71,6 +88,7 @@ header nav ul li a:hover {
   background: #008f7a;
 }
 
+/* Sections */
 section {
   padding: 4rem 2rem;
 }
@@ -81,6 +99,7 @@ section h2 {
   font-size: 2rem;
 }
 
+/* Cards */
 .service-card, .project-card {
   background: #f4f4f4;
   padding: 1.5rem;
@@ -96,13 +115,17 @@ section h2 {
   margin-bottom: 1rem;
 }
 
+/* Profile Picture */
 .profile-pic {
   display: block;
   margin: 2rem auto;
   max-width: 200px;
   border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
 }
 
+/* Forms */
 form {
   max-width: 600px;
   margin: 0 auto;
@@ -111,12 +134,13 @@ form {
   gap: 1rem;
 }
 
-input, textarea {
+input, textarea, select {
   padding: 0.75rem;
   border-radius: 5px;
   border: 1px solid #ccc;
 }
 
+/* Buttons */
 button {
   background: #0a2540;
   color: #fff;
@@ -124,15 +148,59 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
 }
 
 button:hover {
   background: #005f73;
 }
 
+/* Profile Page Inputs & Upload */
+#profilePic {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+}
+
+#username, #bio, #uploadPic, #updateProfile {
+  display: block;
+  margin: 10px 0;
+  padding: 8px;
+  width: 100%;
+  max-width: 400px;
+}
+
+#updateProfile {
+  background-color: #0070f3;
+  color: white;
+  border: none;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+}
+
+#updateProfile:hover {
+  background-color: #005bb5;
+}
+
+/* Footer */
 footer {
   text-align: center;
   padding: 2rem;
   background: #0a2540;
   color: #fff;
+}
+
+/* Responsive Design for About/Profile Sections */
+@media screen and (max-width: 768px) {
+  .about-container {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .profile-pic {
+    margin-bottom: 15px;
+  }
 }
