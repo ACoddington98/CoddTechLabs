@@ -23,10 +23,11 @@ body {
 }
 
 .main-content {
-  flex: 1;
+  flex: 1; /* pushes footer down */
   display: flex;
   flex-direction: column;
-  justify-content: space-between; /* pushes footer to bottom */
+  justify-content: flex-start; /* top-aligned content */
+  gap: 2rem; /* spacing between sections */
 }
 
 /* Optional: center content vertically on short pages */
@@ -93,6 +94,7 @@ header nav {
   background-color: #267ACC; /* hover */
   transform: translateY(-2px);
 }
+
 /* Auth modal */
 .auth-modal {
   position: fixed;
@@ -212,7 +214,9 @@ header nav {
   background: linear-gradient(135deg, #1A1F71 0%, #F2F2F2 100%);
   color: #FFFFFF;
   text-align: center;
-  padding: 6rem 2rem;
+  padding: 8rem 2rem 6rem 2rem; /* spacing so header doesn't overlap */
+  position: relative;
+  z-index: 1;
 }
 
 .hero h1 {
@@ -236,7 +240,7 @@ header nav {
 }
 
 .cta-button:hover {
-  background: #267ACC; /* hover */
+  background-color: #267ACC; /* hover */
 }
 
 /* Sections */
@@ -330,6 +334,7 @@ footer {
   padding: 2rem;
   background-color: #4B4B4B; /* Slate Gray */
   color: #FFFFFF;
+  margin-top: auto; /* stick footer to bottom */
 }
 
 /* Footer links (if any) */
