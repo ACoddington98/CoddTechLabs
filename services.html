@@ -8,85 +8,45 @@
   <link rel="icon" href="images/favicon.ico" type="image/x-icon">
 </head>
 <body>
-<header>
-  <nav>
-    <div class="nav-left">
-      <a href="index.html" class="logo">CoddTechLabs</a>
-      <ul class="nav-links">
-        <li><a href="about.html">About</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-        <li><a href="contact.html">Contact</a></li>
-      </ul>
-    </div>
-    <div class="nav-right">
-      <a href="auth/login.html" id="loginBtn">Login</a>
-      <a href="auth/register.html" id="registerBtn">Register</a>
-    </div>
-  </nav>
-</header>
+  <header>
+    <nav>
+      <div class="nav-left">
+        <a href="index.html" class="logo">CoddTechLabs</a>
+        <ul class="nav-links">
+          <li><a href="about.html">About</a></li>
+          <li><a href="services.html">Services</a></li>
+          <li><a href="portfolio.html">Portfolio</a></li>
+          <li><a href="contact.html">Contact</a></li>
+        </ul>
+      </div>
+      <div class="nav-right">
+        <a href="#" id="loginBtn">Login</a>
+        <a href="#" id="registerBtn">Register</a>
+        <span id="userGreeting" style="display:none;"></span>
+      </div>
+    </nav>
+  </header>
 
-  <section class="services">
-    <h2>Services</h2>
-    <div class="service-card">
-      <h3>Python Automation & AI</h3>
-      <p>Custom scripts, AI/ML models, data analysis, and automation solutions to save time and increase efficiency.</p>
-    </div>
-    <div class="service-card">
-      <h3>JavaScript Development</h3>
-      <p>Front-end and back-end development, bug fixes, and interactive applications using modern frameworks.</p>
-    </div>
-    <div class="service-card">
-      <h3>C/C++ Development</h3>
-      <p>Efficient, optimized, and reliable software solutions, from small utilities to system-level applications.</p>
-    </div>
-    <div class="service-card">
-      <h3>AI/ML Models</h3>
-      <p>Custom AI/ML solutions tailored to your data, business needs, or automation requirements.</p>
-    </div>
-  </section>
+  <div class="main-content">
+    <section class="alt-bg">
+      <h2>Our Services</h2>
+      <div class="service-card">
+        <h3>AI/ML Development</h3>
+        <p>Custom machine learning models and AI solutions tailored to your business needs.</p>
+      </div>
+      <div class="service-card">
+        <h3>Web Development</h3>
+        <p>Full-stack development using Python, JavaScript, and C/C++ for reliable performance.</p>
+      </div>
+      <div class="service-card">
+        <h3>Software Consulting</h3>
+        <p>Expert guidance on project planning, architecture, and technology choices.</p>
+      </div>
+    </section>
+  </div>
 
   <footer>
     <p>&copy; 2025 CoddTechLabs. All rights reserved.</p>
   </footer>
-  <script src="js/script.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  const SUPABASE_URL = "https://qiobjgsmvalwknijuube.supabase.co";
-  const SUPABASE_ANON_KEY = "YOUR_PUBLISHABLE_KEY";
-  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-  async function updateHeader() {
-    const { data: { session } } = await supabase.auth.getSession();
-    const loginBtn = document.getElementById("loginBtn");
-    const registerBtn = document.getElementById("registerBtn");
-
-    if(session) {
-      // User is logged in
-      const { data: profile } = await supabase
-        .from("user_profiles")
-        .select("username")
-        .eq("id", session.user.id)
-        .single();
-
-      // Hide login/register
-      loginBtn.style.display = "none";
-      registerBtn.style.display = "none";
-
-      // Add greeting
-      let greeting = document.createElement("a");
-      greeting.id = "userGreeting";
-      greeting.href = "auth/profile.html";
-      greeting.textContent = `Hello, ${profile.username}`;
-      document.querySelector(".nav-right").appendChild(greeting);
-    } else {
-      // Not logged in, buttons show
-      loginBtn.style.display = "inline-block";
-      registerBtn.style.display = "inline-block";
-    }
-  }
-
-  updateHeader();
-</script>
 </body>
 </html>
