@@ -1,15 +1,27 @@
-<section class="dashboard-container">
-  <h2>Admin Messages</h2>
-  <button id="logoutBtn">Logout</button>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Dashboard – CoddTechLabs</title>
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+  <header>
+    <h1>CoddTechLabs Admin Dashboard</h1>
+  </header>
 
-  <div class="controls">
-    <button id="sortNewest">Sort: Newest</button>
-    <button id="sortOldest">Sort: Oldest</button>
-    <input type="text" id="searchBox" placeholder="Search messages...">
-  </div>
+  <section class="dashboard-container">
+    <div class="controls">
+      <button id="sortNewest">Sort: Newest</button>
+      <button id="sortOldest">Sort: Oldest</button>
+      <input type="text" id="searchBox" placeholder="Search messages...">
+    </div>
 
-  <div id="messages"></div>
-</section>
+    <div id="messages"></div>
+  </section>
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="admin.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
