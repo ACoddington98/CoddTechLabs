@@ -23,11 +23,11 @@ body {
 }
 
 .main-content {
-  flex: 1; /* pushes footer down */
+  flex: 1;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start; /* top-aligned content */
-  gap: 2rem; /* spacing between sections */
+  justify-content: flex-start;
+  gap: 2rem;
 }
 
 /* Optional: center content vertically on short pages */
@@ -41,7 +41,7 @@ header nav {
   justify-content: space-between;
   align-items: center;
   padding: 1rem 2rem;
-  background-color: #1A1F71; /* Deep Blue nav */
+  background-color: #1A1F71;
 }
 
 .nav-left {
@@ -53,7 +53,7 @@ header nav {
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #3399FF; /* Electric Blue logo accent */
+  color: #3399FF;
   text-decoration: none;
 }
 
@@ -64,14 +64,14 @@ header nav {
 }
 
 .nav-links li a {
-  color: #FFFFFF; /* white nav links */
+  color: #FFFFFF;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
 }
 
 .nav-links li a:hover {
-  color: #3399FF; /* Electric Blue hover */
+  color: #3399FF;
 }
 
 .nav-right {
@@ -80,10 +80,23 @@ header nav {
   gap: 0.75rem;
 }
 
+/* Profile when logged in */
+.logged-in #userProfile {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.profile-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
 .nav-right a {
   padding: 8px 14px;
   border-radius: 5px;
-  background-color: #3399FF; /* Electric Blue buttons */
+  background-color: #3399FF;
   color: #FFFFFF;
   text-decoration: none;
   font-weight: bold;
@@ -91,7 +104,7 @@ header nav {
 }
 
 .nav-right a:hover {
-  background-color: #267ACC; /* hover */
+  background-color: #267ACC;
   transform: translateY(-2px);
 }
 
@@ -126,7 +139,8 @@ header nav {
   text-align: center;
 }
 
-.auth-modal-content input {
+.auth-modal-content input,
+.auth-modal-content select {
   width: 100%;
   padding: 0.75rem;
   margin-bottom: 1rem;
@@ -143,6 +157,7 @@ header nav {
   border-radius: 5px;
   font-weight: bold;
   cursor: pointer;
+  transition: background 0.3s;
 }
 
 .auth-modal-content button:hover {
@@ -177,14 +192,6 @@ header nav {
   display: none;
 }
 
-/* Hello username */
-.logged-in #userGreeting {
-  display: inline-block;
-  color: #3399FF;
-  font-weight: bold;
-  text-decoration: none;
-}
-
 /* Responsive for mobile */
 @media screen and (max-width: 768px) {
   header nav {
@@ -207,14 +214,22 @@ header nav {
   .nav-right a, .logged-in #userGreeting {
     width: auto;
   }
+
+  .hero h1 { font-size: 2rem; }
+  .hero p { font-size: 1rem; }
 }
 
 /* Hero Section */
 .hero {
-  background: linear-gradient(135deg, #1A1F71 0%, #F2F2F2 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #1A1F71 0%, #FFFFFF 100%);
   color: #FFFFFF;
   text-align: center;
-  padding: 8rem 2rem 6rem 2rem; /* spacing so header doesn't overlap */
+  min-height: calc(100vh - 80px);
+  padding: 2rem;
   position: relative;
   z-index: 1;
 }
@@ -231,7 +246,7 @@ header nav {
 
 /* Call-to-action buttons */
 .cta-button {
-  background: #3399FF; /* Electric Blue */
+  background: #3399FF;
   color: #FFFFFF;
   padding: 0.75rem 1.5rem;
   text-decoration: none;
@@ -240,7 +255,7 @@ header nav {
 }
 
 .cta-button:hover {
-  background-color: #267ACC; /* hover */
+  background-color: #267ACC;
 }
 
 /* Sections */
@@ -250,7 +265,7 @@ section {
 }
 
 section.alt-bg {
-  background-color: #F2F2F2; /* Light Gray alternate */
+  background-color: #F2F2F2;
 }
 
 section h2 {
@@ -300,7 +315,7 @@ input, textarea, select {
 }
 
 input:focus, textarea:focus, select:focus {
-  outline: 2px solid #3399FF; /* Electric Blue focus */
+  outline: 2px solid #3399FF;
 }
 
 /* Buttons */
@@ -321,20 +336,20 @@ button:hover {
 
 /* Success & Warning messages */
 .success {
-  color: #27AE60; /* Soft Green */
+  color: #27AE60;
 }
 
 .warning {
-  color: #F2994A; /* Warm Orange */
+  color: #F2994A;
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 2rem;
-  background-color: #4B4B4B; /* Slate Gray */
+  background-color: #4B4B4B;
   color: #FFFFFF;
-  margin-top: auto; /* stick footer to bottom */
+  margin-top: auto;
 }
 
 /* Footer links (if any) */
