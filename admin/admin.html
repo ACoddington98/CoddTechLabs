@@ -1,46 +1,15 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Admin Dashboard – CoddTechLabs</title>
-  <link rel="stylesheet" href="../css/style.css">
-  <link rel="stylesheet" href="admin.css">
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-</head>
-<body>
-  <!-- Header / Navigation -->
-  <header>
-    <nav>
-      <a href="../index.html" class="logo">CoddTechLabs</a>
-      <ul>
-        <li><a href="../about.html">About</a></li>
-        <li><a href="../services.html">Services</a></li>
-        <li><a href="../portfolio.html">Portfolio</a></li>
-        <li><a href="../contact.html">Contact</a></li>
-      </ul>
-    </nav>
-  </header>
+<section class="dashboard-container">
+  <h2>Admin Messages</h2>
+  <button id="logoutBtn">Logout</button>
 
-  <!-- Dashboard -->
-  <section class="dashboard-container">
-    <h2>Admin Messages</h2>
-    <button id="logoutBtn">Logout</button>
+  <div class="controls">
+    <button id="sortNewest">Sort: Newest</button>
+    <button id="sortOldest">Sort: Oldest</button>
+    <input type="text" id="searchBox" placeholder="Search messages...">
+  </div>
 
-    <div class="controls">
-      <button id="sortNewest">Sort: Newest</button>
-      <button id="sortOldest">Sort: Oldest</button>
-      <input type="text" id="searchBox" placeholder="Search messages...">
-    </div>
+  <div id="messages"></div>
+</section>
 
-    <div id="messages"></div>
-  </section>
-
-  <!-- Footer -->
-  <footer>
-    <p>&copy; 2025 CoddTechLabs. All rights reserved.</p>
-  </footer>
-
-  <script src="admin.js"></script>
-</body>
-</html>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="admin.js"></script>
