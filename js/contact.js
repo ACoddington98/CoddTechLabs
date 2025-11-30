@@ -1,4 +1,13 @@
+// ---------------------
+// Supabase setup
+// ---------------------
+const SUPABASE_URL = "https://qiobjgsmvalwknijuube.supabase.co";
+const SUPABASE_ANON_KEY = "YOUR_ANON_KEY"; // replace with your anon key
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// ---------------------
 // Add CSS keyframes for bounce
+// ---------------------
 const style = document.createElement('style');
 style.innerHTML = `
 @keyframes popupBounce {
@@ -12,16 +21,18 @@ style.innerHTML = `
 `;
 document.head.appendChild(style);
 
+// ---------------------
 // DOM Elements
+// ---------------------
 const contactForm = document.getElementById("contactForm");
 
-// Create or use an existing popup element
+// Create or reuse popup element
 let popup = document.getElementById("contactPopup");
 if (!popup) {
   popup = document.createElement("div");
   popup.id = "contactPopup";
   popup.style.position = "fixed";
-  popup.style.bottom = "-100px"; // start off-screen
+  popup.style.bottom = "-100px";
   popup.style.right = "20px";
   popup.style.padding = "15px 25px";
   popup.style.backgroundColor = "#4CAF50";
@@ -37,6 +48,7 @@ if (!popup) {
   popup.style.maxWidth = "350px";
   popup.style.boxSizing = "border-box";
   popup.style.textAlign = "center";
+  popup.style.transition = "box-shadow 0.3s ease, bottom 0.6s ease, opacity 0.6s ease";
 
   // Create close button
   const closeBtn = document.createElement("span");
@@ -49,26 +61,28 @@ if (!popup) {
   closeBtn.style.userSelect = "none";
   popup.appendChild(closeBtn);
 
-  // Close popup when clicking the X
   closeBtn.addEventListener("click", () => {
     if (popupTimeout) clearTimeout(popupTimeout);
-    popup.style.animation = "";
     popup.style.opacity = "0";
     popup.style.bottom = "-100px";
+    popup.style.boxShadow = "0 8px 20px rgba(0,0,0,0.2)";
     setTimeout(() => { popup.style.display = "none"; }, 600);
   });
 
   document.body.appendChild(popup);
 }
 
-// Function to show popup with bounce
+// ---------------------
+// Show popup function
+// ---------------------
 let popupTimeout;
 function showPopup(message) {
   if (popupTimeout) clearTimeout(popupTimeout);
 
-  popup.childNodes.forEach(node => {
-    if (node.nodeType === Node.TEXT_NODE) node.remove();
-  });
+  // Clear previous text nodes but preserve close button
+  const closeBtn = popup.querySelector("span");
+  popup.innerHTML = "";
+  popup.appendChild(closeBtn);
 
   const textNode = document.createTextNode(message);
   popup.insertBefore(textNode, popup.firstChild);
@@ -82,10 +96,12 @@ function showPopup(message) {
     popup.style.bottom = "-100px";
     popup.style.boxShadow = "0 8px 20px rgba(0,0,0,0.2)";
     setTimeout(() => { popup.style.display = "none"; }, 600);
-  }, 30000);
+  }, 30000); // 30 seconds
 }
 
+// ---------------------
 // Handle contact form submission
+// ---------------------
 contactForm.addEventListener("submit", async (e) => {
   e.preventDefault();
 
@@ -98,9 +114,7 @@ contactForm.addEventListener("submit", async (e) => {
     if (error) throw error;
 
     contactForm.reset();
-
     showPopup("Message sent! We'll get in contact with you as soon as we can.");
-
   } catch (err) {
     showPopup("Error sending message. Try again.");
   }
