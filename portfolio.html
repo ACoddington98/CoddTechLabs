@@ -36,13 +36,11 @@
 
   <!-- Main Content -->
   <main class="main-content">
-    <!-- Hero Section -->
     <section class="hero">
       <h1>Our Portfolio</h1>
       <p>Take a look at some of the projects we’ve delivered for our clients.</p>
     </section>
 
-    <!-- Web Development Projects -->
     <section class="alt-bg">
       <h2>Web Development Projects</h2>
       <div class="project-card">
@@ -57,7 +55,6 @@
       </div>
     </section>
 
-    <!-- AI & Machine Learning Projects -->
     <section>
       <h2>AI & Machine Learning Projects</h2>
       <div class="project-card">
@@ -72,7 +69,6 @@
       </div>
     </section>
 
-    <!-- Consulting & Support Projects -->
     <section class="alt-bg">
       <h2>Consulting & Support Projects</h2>
       <div class="project-card">
@@ -144,13 +140,16 @@
       authModal.style.display = "flex";
       document.getElementById("authTitle").innerText = "Login";
     });
+
     registerBtn.addEventListener("click", () => {
       authModal.style.display = "flex";
       document.getElementById("authTitle").innerText = "Register";
     });
+
     document.getElementById("closeAuthModal").addEventListener("click", () => {
       authModal.style.display = "none";
     });
+
     document.getElementById("closeProfileModal").addEventListener("click", () => {
       profileModal.style.display = "none";
     });
@@ -170,7 +169,7 @@
       document.getElementById("profileType").value = userType.textContent.replace(/[()]/g, "");
     });
 
-    // Save Profile Changes
+    // Save Profile
     document.getElementById("saveProfileBtn").addEventListener("click", () => {
       userName.textContent = `Hello, ${document.getElementById("profileName").value}`;
       userType.textContent = `(${document.getElementById("profileType").value})`;
@@ -178,21 +177,8 @@
       profileModal.style.display = "none";
     });
 
-    // Simulated login (replace with Supabase integration later)
-    let currentUser = {
-      name: "John Doe",
-      type: "customer",
-      avatar: "images/default-profile.png"
-    };
-    function populateProfile(user) {
-      loginBtn.style.display = "none";
-      registerBtn.style.display = "none";
-      userProfile.style.display = "flex";
-      userName.textContent = `Hello, ${user.name}`;
-      userType.textContent = `(${user.type})`;
-      userAvatar.src = user.avatar || "images/default-profile.png";
-    }
-    populateProfile(currentUser);
+    // Option 1 Fix: No auto-login
+    // Removed the fake currentUser and populateProfile() call
   </script>
 </body>
 </html>
