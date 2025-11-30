@@ -167,5 +167,216 @@
       profileModal.style.display = "none";
     });
   </script>
+<!-- =========================
+     AUTH & PROFILE MODALS
+========================= -->
+<!-- Auth Modal -->
+<div id="authModal" class="auth-modal" style="display:none;">
+  <div class="auth-modal-content">
+    <span class="close" id="closeAuthModal">&times;</span>
+    <h2 id="authTitle">Login</h2>
+    <input type="email" id="authEmail" placeholder="Email" required>
+    <input type="password" id="authPassword" placeholder="Password" required>
+    <button id="authSubmit">Submit</button>
+    <p id="switchAuthText">Don't have an account? <a href="#" id="switchAuth">Register</a></p>
+  </div>
+</div>
+
+<!-- Profile Modal -->
+<div id="profileModal" class="auth-modal" style="display:none;">
+  <div class="auth-modal-content">
+    <span class="close" id="closeProfileModal">&times;</span>
+    <h2>Update Profile</h2>
+    <label for="profileName">Name</label>
+    <input type="text" id="profileName">
+    <label for="profileAvatar">Profile Picture URL</label>
+    <input type="text" id="profileAvatarInput" placeholder="Enter image URL">
+    <label for="profileType">Account Type</label>
+    <select id="profileType">
+      <option value="customer">Customer</option>
+      <option value="employee">Employee</option>
+    </select>
+    <button id="saveProfileBtn">Save</button>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // ---------------------
+  // Supabase setup
+  // ---------------------
+  const SUPABASE_URL = "https://qiobjgsmvalwknijuube.supabase.co";
+  const SUPABASE_ANON_KEY = "sb_publishable_BfFRc4t5A_F94S4KrD4s3A_VwtlanUM";
+  const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // ---------------------
+  // DOM Elements
+  // ---------------------
+  const loginBtn = document.getElementById("loginBtn");
+  const registerBtn = document.getElementById("registerBtn");
+  const authModal = document.getElementById("authModal");
+  const closeAuthModal = document.getElementById("closeAuthModal");
+  const authTitle = document.getElementById("authTitle");
+  const authSubmit = document.getElementById("authSubmit");
+  const switchAuth = document.getElementById("switchAuth");
+  const authEmail = document.getElementById("authEmail");
+  const authPassword = document.getElementById("authPassword");
+
+  const userProfile = document.getElementById("userProfile");
+  const userName = document.getElementById("userName");
+  const userType = document.getElementById("userType");
+  const userAvatar = document.getElementById("userAvatar");
+  const logoutBtn = document.getElementById("logoutBtn");
+
+  const profileModal = document.getElementById("profileModal");
+  const closeProfileModal = document.getElementById("closeProfileModal");
+  const profileName = document.getElementById("profileName");
+  const profileAvatarInput = document.getElementById("profileAvatarInput");
+  const profileType = document.getElementById("profileType");
+  const saveProfileBtn = document.getElementById("saveProfileBtn");
+
+  let isLoginMode = true;
+
+  // ---------------------
+  // Open Modals
+  // ---------------------
+  loginBtn.addEventListener("click", () => {
+    isLoginMode = true;
+    authModal.style.display = "flex";
+    authTitle.innerText = "Login";
+  });
+
+  registerBtn.addEventListener("click", () => {
+    isLoginMode = false;
+    authModal.style.display = "flex";
+    authTitle.innerText = "Register";
+  });
+
+  closeAuthModal.addEventListener("click", () => authModal.style.display = "none");
+  closeProfileModal.addEventListener("click", () => profileModal.style.display = "none");
+
+  // Switch between Login/Register
+  switchAuth.addEventListener("click", () => {
+    isLoginMode = !isLoginMode;
+    authTitle.innerText = isLoginMode ? "Login" : "Register";
+    switchAuth.parentElement.innerHTML = isLoginMode
+      ? 'Don\'t have an account? <a href="#" id="switchAuth">Register</a>'
+      : 'Already have an account? <a href="#" id="switchAuth">Login</a>';
+  });
+
+  // ---------------------
+  // Auth Submit
+  // ---------------------
+  authSubmit.addEventListener("click", async () => {
+    const email = authEmail.value.trim();
+    const password = authPassword.value.trim();
+
+    if (isLoginMode) {
+      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
+      if (error) return alert("Login failed: " + error.message);
+
+      const user = data.user;
+      const { data: profile } = await supabase.from("user_profiles").select("*").eq("id", user.id).single();
+
+      localStorage.setItem("user", JSON.stringify({
+        id: user.id,
+        email: user.email,
+        username: profile.username,
+        role: profile.role,
+        avatar: profile.profile_image
+      }));
+
+      populateProfile();
+      authModal.style.display = "none";
+    } else {
+      const username = prompt("Enter a username for your account");
+      const role = "customer";
+
+      const { data: authData, error } = await supabase.auth.signUp({ email, password });
+      if (error) return alert("Registration failed: " + error.message);
+
+      await supabase.from("user_profiles").insert([{
+        id: authData.user.id,
+        username,
+        role,
+        profile_image: "images/default-profile.png"
+      }]);
+
+      localStorage.setItem("user", JSON.stringify({
+        id: authData.user.id,
+        email,
+        username,
+        role,
+        avatar: "images/default-profile.png"
+      }));
+
+      populateProfile();
+      authModal.style.display = "none";
+    }
+  });
+
+  // ---------------------
+  // Populate Profile
+  // ---------------------
+  function populateProfile() {
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    if (!savedUser) return;
+
+    loginBtn.style.display = "none";
+    registerBtn.style.display = "none";
+    userProfile.style.display = "flex";
+    userName.textContent = `Hello, ${savedUser.username}`;
+    userType.textContent = `(${savedUser.role})`;
+    userAvatar.src = savedUser.avatar || "images/default-profile.png";
+  }
+
+  // ---------------------
+  // Logout
+  // ---------------------
+  logoutBtn.addEventListener("click", async () => {
+    localStorage.removeItem("user");
+    loginBtn.style.display = "inline-block";
+    registerBtn.style.display = "inline-block";
+    userProfile.style.display = "none";
+    await supabase.auth.signOut();
+  });
+
+  // ---------------------
+  // Open Profile Modal
+  // ---------------------
+  userProfile.addEventListener("click", () => {
+    profileModal.style.display = "flex";
+    const savedUser = JSON.parse(localStorage.getItem("user"));
+    profileName.value = savedUser.username;
+    profileAvatarInput.value = savedUser.avatar;
+    profileType.value = savedUser.role;
+  });
+
+  // ---------------------
+  // Save Profile Changes
+  // ---------------------
+  saveProfileBtn.addEventListener("click", async () => {
+    const name = profileName.value.trim();
+    const avatar = profileAvatarInput.value.trim();
+    const role = profileType.value;
+    const user = JSON.parse(localStorage.getItem("user"));
+
+    await supabase.from("user_profiles").update({
+      username: name,
+      profile_image: avatar,
+      role: role
+    }).eq("id", user.id);
+
+    localStorage.setItem("user", JSON.stringify({...user, username: name, avatar: avatar, role: role}));
+
+    userName.textContent = `Hello, ${name}`;
+    userType.textContent = `(${role})`;
+    userAvatar.src = avatar || "images/default-profile.png";
+
+    profileModal.style.display = "none";
+  });
+
+  document.addEventListener("DOMContentLoaded", populateProfile);
+</script>
 </body>
 </html>
