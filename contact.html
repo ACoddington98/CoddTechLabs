@@ -75,7 +75,7 @@
       <label for="profileName">Name</label>
       <input type="text" id="profileName">
 
-      <label for="profileAvatar">Profile Picture URL</label>
+      <label for="profileAvatarInput">Profile Picture URL</label>
       <input type="text" id="profileAvatarInput" placeholder="Enter image URL">
 
       <label for="profileType">Account Type</label>
@@ -88,11 +88,13 @@
     </div>
   </div>
 
-  <script src="js/auth.js"></script>
+  <!-- Supabase + Auth.js -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/auth.js"></script>
+
   <script>
     const SUPABASE_URL = "https://qiobjgsmvalwknijuube.supabase.co";
-    const SUPABASE_ANON_KEY = "YOUR_PUBLISHABLE_KEY"; // replace with your actual anon key
+    const SUPABASE_ANON_KEY = "YOUR_PUBLISHABLE_KEY"; // replace with your anon key
     const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
     const loginBtn = document.getElementById("loginBtn");
@@ -121,12 +123,15 @@
     document.getElementById("closeAuthModal").addEventListener("click", () => authModal.style.display = "none");
     document.getElementById("closeProfileModal").addEventListener("click", () => profileModal.style.display = "none");
 
-    logoutBtn.addEventListener("click", () => {
+    // Logout
+    logoutBtn.addEventListener("click", async () => {
+      await supabase.auth.signOut();
       userProfile.style.display = "none";
       loginBtn.style.display = "inline-block";
       registerBtn.style.display = "inline-block";
     });
 
+    // Open Profile Modal
     userProfile.addEventListener("click", () => {
       profileModal.style.display = "flex";
       document.getElementById("profileName").value = userName.textContent.replace("Hello, ", "");
@@ -134,10 +139,21 @@
       document.getElementById("profileType").value = userType.textContent.replace(/[()]/g, "");
     });
 
-    document.getElementById("saveProfileBtn").addEventListener("click", () => {
-      userName.textContent = `Hello, ${document.getElementById("profileName").value}`;
-      userType.textContent = `(${document.getElementById("profileType").value})`;
-      userAvatar.src = document.getElementById("profileAvatarInput").value || "images/default-profile.png";
+    // Save Profile
+    document.getElementById("saveProfileBtn").addEventListener("click", async () => {
+      const name = document.getElementById("profileName").value;
+      const avatar = document.getElementById("profileAvatarInput").value;
+      const type = document.getElementById("profileType").value;
+
+      const { data: { user } } = await supabase.auth.getUser();
+      if (user) {
+        await supabase.from('user_profiles').update({ username: name, profile_image: avatar, role: type })
+          .eq('id', user.id);
+      }
+
+      userName.textContent = `Hello, ${name}`;
+      userType.textContent = `(${type})`;
+      userAvatar.src = avatar || "images/default-profile.png";
       profileModal.style.display = "none";
     });
 
@@ -149,10 +165,7 @@
       const message = document.getElementById("message").value;
 
       try {
-        const { data, error } = await supabase
-          .from('messages')
-          .insert([{ name, email, message }]);
-
+        const { data, error } = await supabase.from('messages').insert([{ name, email, message }]);
         if (error) throw error;
 
         contactFeedback.textContent = "Message sent successfully!";
@@ -164,6 +177,7 @@
       }
     });
 
+    // Example login success function
     function onLoginSuccess(user) {
       loginBtn.style.display = "none";
       registerBtn.style.display = "none";
