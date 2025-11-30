@@ -122,7 +122,10 @@
     </div>
   </div>
 
+  <!-- Supabase + Auth.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="js/auth.js"></script>
+
   <script>
     const loginBtn = document.getElementById("loginBtn");
     const registerBtn = document.getElementById("registerBtn");
@@ -177,8 +180,7 @@
       profileModal.style.display = "none";
     });
 
-    // Option 1 Fix: No auto-login
-    // Removed the fake currentUser and populateProfile() call
+    // Option 1 Fix: removed fake currentUser, use auth.js for real Supabase login/register
   </script>
 </body>
 </html>
